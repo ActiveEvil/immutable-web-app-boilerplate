@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "types": ["./node_modules/@types"],
+  "compileOnSave": false,
+  "include": ["handlers/**/*", "lib/**/*"],
+  "exclude": ["node_modules", "**/__tests__"]
+}

@@ -1,0 +1,12 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-config-standard"
+  ],
+  "rules": {
+    "interface-name": [true, "never-prefix"],
+    "max-line-length": false,
+    "no-implicit-dependencies": false,
+    "no-submodule-imports": false
+  }
+}

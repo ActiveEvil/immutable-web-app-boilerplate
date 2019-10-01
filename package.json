@@ -1,0 +1,91 @@
+{
+  "name": "immutable-web-app-boilerplate",
+  "version": "0.0.1",
+  "author": "ActiceEvil <active_evil@protonmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "setup": "bash ./scripts/setup.sh",
+    "test": "jest --coverage --verbose",
+    "start": "bash ./scripts/start.sh",
+    "lint:client": "tslint --fix --project tsconfig.client.json --format verbose",
+    "lint:infrastructure": "tslint --fix --project tsconfig.json --format verbose",
+    "deploy:assets": "bash ./scripts/deployAssets.sh",
+    "deploy:app": "bash ./scripts/deployApp.sh",
+    "preversion": "yarn test",
+    "postversion": "git push && git push --tags",
+    "i18next": "i18next 'src/**/*.{ts,tsx}' --config ./i18next-parser.config.js"
+  },
+  "dependencies": {
+    "accept-language": "^3.0.18",
+    "aws-sdk": "^2.514.0",
+    "cookie": "^0.4.0",
+    "mustache": "^3.0.1"
+  },
+  "devDependencies": {
+    "@tanem/react-nprogress": "^3.0.5",
+    "@types/aws-lambda": "^8.10.31",
+    "@types/aws-sdk": "^2.7.0",
+    "@types/cookie": "^0.3.3",
+    "@types/cors": "^2.8.6",
+    "@types/jest": "^24.0.17",
+    "@types/mustache": "^0.8.32",
+    "@types/node": "^12.7.2",
+    "@types/node-fetch": "^2.5.1",
+    "@types/react": "^16.9.1",
+    "@types/react-dom": "^16.8.5",
+    "@types/styled-components": "^4.1.19",
+    "@types/webpack-dev-middleware": "^2.0.3",
+    "@types/webpack-hot-middleware": "^2.16.5",
+    "acorn-jsx": "^4.1.1",
+    "cors": "^2.8.5",
+    "cpr": "^3.0.1",
+    "del-cli": "^2.0.0",
+    "express": "^4.17.1",
+    "html-webpack-plugin": "^3.2.0",
+    "i18next": "^17.0.12",
+    "i18next-browser-languagedetector": "^3.0.3",
+    "i18next-parser": "1.0.0-beta34",
+    "i18next-xhr-backend": "^3.1.2",
+    "jest": "^24.8.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-i18next": "^10.12.2",
+    "serverless": "^1.50.0",
+    "serverless-finch": "^2.4.2",
+    "serverless-plugin-cloudfront-lambda-edge": "^2.1.0",
+    "serverless-webpack": "^5.3.1",
+    "styled-components": "^4.4.0",
+    "ts-import-plugin": "^1.6.1",
+    "ts-jest": "^24.0.2",
+    "ts-loader": "^6.0.4",
+    "ts-node-dev": "^1.0.0-pre.41",
+    "tslint": "^5.20.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-middleware": "^3.7.1",
+    "webpack-dev-server": "^3.8.0",
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "globals": {
+      "window": {}
+    },
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/test/"
+    ],
+    "setupFiles": [
+      "<rootDir>/test/setup.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/lib/",
+      "<rootDir>/node_modules/",
+      "<rootDir>/test/"
+    ]
+  }
+}

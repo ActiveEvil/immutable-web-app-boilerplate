@@ -1,0 +1,2 @@
+openssl req -config certs/ssl.conf -new -sha256 -newkey rsa:2048 -nodes -keyout certs/private.key -x509 -days 3650 -out certs/private.crt
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain certs/private.crt

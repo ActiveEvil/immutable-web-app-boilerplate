@@ -1,0 +1,30 @@
+module.exports = {
+  contextSeparator: '_',
+  createOldCatalogs: true,
+  defaultNamespace: 'translation',
+  defaultValue: '',
+  indentation: 2,
+  keepRemoved: false,
+  keySeparator: '.',
+  lexers: {
+    hbs: ['HandlebarsLexer'],
+    handlebars: ['HandlebarsLexer'],
+    htm: ['HTMLLexer'],
+    html: ['HTMLLexer'],
+    js: ['JavascriptLexer'], 
+    jsx: ['JsxLexer'],
+    mjs: ['JavascriptLexer'],
+    ts: ['TypescriptLexer'],
+    tsx: ['TypescriptLexer'],
+    default: ['JavascriptLexer']
+  },
+  lineEnding: 'auto',
+  locales: ['en', 'ja'],
+  namespaceSeparator: ':',
+  output: 'public/locales/$LOCALE/$NAMESPACE.json',
+  input: 'src/**',
+  reactNamespace: false,
+  sort: true,
+  useKeysAsDefaultValue: false,
+  verbose: false
+}
