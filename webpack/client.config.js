@@ -18,16 +18,7 @@ module.exports = (env, { mode }) => ({
         exclude: /node_modules/,
         loader: 'ts-loader',
         options: {
-          configFile: resolve(__dirname, '../tsconfig.client.json'),
-          getCustomTransformers: () => ({
-            before: [ 
-              tsImportPluginFactory({
-                libraryName: 'antd',
-                libraryDirectory: 'lib',
-                style: true
-              }) 
-            ]
-          }),
+          configFile: resolve(__dirname, '../tsconfig.client.json')
         }
       }
     ]
