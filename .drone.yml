@@ -1,0 +1,121 @@
+kind: secret
+name: serverless_access_key
+get:
+  path: aws
+  name: AWS_ACCESS_KEY_ID
+---
+kind: secret
+name: serverless_access_secret
+get:
+  path: aws
+  name: AWS_SECRET_ACCESS_KEY
+---
+kind: pipeline
+name: Test and Build
+
+trigger:
+  event:
+    - push
+  branch:
+    exclude:
+      - master
+      - develop
+
+volumes:
+  - name: yarn-cache-v4
+    host:
+      path: /yarn/cache/v4
+
+steps:
+  - name: 'Install Dependencies'
+    image: node:10.15.0-alpine
+    volumes:
+      - name: yarn-cache-v4
+        path: /usr/local/share/.cache/yarn/v4
+    commands:
+      - yarn 
+
+  - name: 'Test linting'
+    image: node:10.15.0-alpine
+    commands:
+      - yarn lint:client
+
+  - name: 'Test interface'
+    image: node:10.15.0-alpine
+    commands:
+      - yarn test
+
+  - name: 'Build'
+    image: node:10.15.0-alpine
+    commands:
+      - yarn build
+---
+kind: pipeline
+name: Continuous Delivery 
+
+trigger:
+  event:
+    - push
+  branch:
+    - master
+    - develop
+
+volumes:
+  - name: yarn-cache-v4
+    host:
+      path: /yarn/cache/v4
+
+steps:
+  - name: 'Install Dependencies'
+    image: node:10.15.0-alpine
+    volumes:
+      - name: yarn-cache-v4
+        path: /usr/local/share/.cache/yarn/v4
+    commands:
+      - yarn 
+
+  - name: 'Build'
+    image: node:10.15.0-alpine
+    commands:
+      - yarn build
+  
+  - name: 'Deploy Experimental Assets'
+    image: node:10.15.0-alpine
+    commands:
+      - yarn deploy:assets
+    environment:
+        AWS_ACCESS_KEY_ID:
+          from_secret: serverless_access_key
+        AWS_SECRET_ACCESS_KEY:
+          from_secret: serverless_access_secret
+        STAGE: experimental
+    when:
+      branch:
+      - develop
+  
+  - name: 'Deploy Production Assets'
+    image: node:10.15.0-alpine
+    commands:
+      - yarn deploy:assets
+    environment:
+        AWS_ACCESS_KEY_ID:
+          from_secret: serverless_access_key
+        AWS_SECRET_ACCESS_KEY:
+          from_secret: serverless_access_secret
+        STAGE: production
+    when:
+      branch:
+      - master
+
+  # - name: 'Deploy Lambda'
+  #   image: node:10.15.0-alpine
+  #   commands:
+  #     - yarn deploy:lambda
+  #   environment:
+  #       AWS_ACCESS_KEY_ID:
+  #         from_secret: serverless_access_key
+  #       AWS_SECRET_ACCESS_KEY:
+  #         from_secret: serverless_access_secret
+  #       STAGE: production
+  #   when:
+  #     tag: lambda*

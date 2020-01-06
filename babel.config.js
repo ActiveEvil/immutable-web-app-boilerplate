@@ -4,10 +4,18 @@ module.exports = {
       '@babel/preset-env',
       {
         targets: {
-          node: 'current',
-        },
-      },
+          node: 'current'
+        }
+      }
     ],
-    '@babel/preset-typescript',
+    '@babel/preset-typescript'
   ],
+  plugins: [
+    [
+      'i18next-extract', 
+      {
+        outputPath: 'public/locales/{{locale}}/{{ns}}.json'
+      }
+    ]
+  ]
 };

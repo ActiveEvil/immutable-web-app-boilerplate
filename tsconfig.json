@@ -7,6 +7,6 @@
   },
   "types": ["./node_modules/@types"],
   "compileOnSave": false,
-  "include": ["handlers/**/*", "lib/**/*"],
+  "include": ["handler.ts", "lib/**/*"],
   "exclude": ["node_modules", "**/__tests__"]
 }

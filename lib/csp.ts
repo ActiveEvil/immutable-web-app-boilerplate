@@ -30,7 +30,7 @@ export const createCspHeader = (
   options: ExtendedOptions,
   scripts?: string[]
 ): string => {
-  const { origin, config } = options
+  const { origin, config, nonce } = options
   const { services } = JSON.parse(config)
   const connectSrc = services ? parseServices(Object.values(services)) : []
   const scriptHashes = scripts.length ? scripts.map(cspHash) : []
@@ -44,7 +44,7 @@ export const createCspHeader = (
     ['frame-ancestors', none],
     ['img-src', self, origin, ...imgsSrc],
     ['script-src', origin, ...scriptsSrc, ...scriptHashes],
-    ['style-src', origin, unsafeInline, ...stylesSrc]
+    ['style-src', origin, `'nonce-${nonce}'`, ...stylesSrc]
   ]
 
   return directives.map((d) => d.join(' ')).join('; ')

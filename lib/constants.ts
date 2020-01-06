@@ -10,7 +10,7 @@ export const cspSources = {
   fontsSrc: ['https://fonts.gstatic.com'],
   formActionSrc: [],
   imgsSrc: [],
-  none: 'none',
+  none: "'none'",
   scriptsSrc: ['https://unpkg.com'],
   self: "'self'",
   stylesSrc: ['https://fonts.googleapis.com'],
@@ -21,8 +21,8 @@ export const region = 'us-east-1'
 
 export const ssmAppParameters = ['appConfig', 'appVersion', 'assetDomain']
 
-export const ssmAssetParameters: [string, string] = ['immutable', 'assetDomain']
+export const ssmAssetParameters: [string, string] = ['web-apps', 'assetDomain']
 
-export const supportedLanguages = ['en', 'ja']
+export const supportedLanguages = ['en', 'pl']
 
 export const templateName = 'index.html.mustache'

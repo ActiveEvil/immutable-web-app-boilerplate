@@ -1,0 +1,21 @@
+{
+  "Example": {
+    "metatitle": "To jest inny widok",
+    "text": "Nadchodzą! Wchodzą za szybko! Oooch! Straciliśmy kontrolę boczną. Nie martw się, będzie się trzymać razem. Słyszysz mnie kochanie? Trzymać się razem! Mam go! Mam go! Świetne dziecko! Nie bądź zarozumiały. Są jeszcze dwa z nich! Otóż to! Zrobiliśmy to! Zrobiliśmy to! Wsparcie! Myślę, że się topię! To wszystko twoja wina.",
+    "title": "To jest inny widok"
+  },
+  "Home": {
+    "metatitle": "To jest widok główny",
+    "text": "A co z Rebelią? Jeśli Rebelianci uzyskali pełny techniczny odczyt tej stacji, jest jednak możliwe, że jest mało prawdopodobne, że znajdą słabość i wykorzystają ją. Plany, o których mówisz, wkrótce wrócą w nasze ręce. Każdy atak Rebelii na tę stację byłby bezużytecznym gestem, bez względu na to, jakie dane techniczne uzyskali. Ta stacja jest teraz najwyższą mocą we wszechświecie. Sugeruję, abyśmy go wykorzystali!",
+    "title": "To jest widok główny"
+  },
+  "PageNotFound": {
+    "metatitle": "Strona nie znaleziona :("
+  },
+  "ScreenWrap": {
+    "exampleLink": "Przykład",
+    "homeLink": "Dom",
+    "title": "Witaj",
+    "footer": "stopki"
+  }
+}

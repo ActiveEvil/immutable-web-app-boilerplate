@@ -1,7 +1,7 @@
 'use strict'
 
 import { CloudFrontResponseEvent, CloudFrontResponseHandler } from 'aws-lambda'
-import { appName, getOptionsFromSsm, getResponse, region, Request, SSMOptions } from '../lib'
+import { appName, getOptionsFromSsm, getResponse, region, Request, SSMOptions } from './lib'
 
 const createHandler = (stage: string): CloudFrontResponseHandler => (event, _, callback) => {
   const handleRequest = (err: Error, options: SSMOptions) => {

@@ -17,6 +17,7 @@ temp/
 .serverless/
 .webpack/
 .awcache/
+service-account.json
 
 # Packages
 *.7z
@@ -86,4 +87,4 @@ typings/
 
 # dotenv environment variables file
 .env
-
+.secrets

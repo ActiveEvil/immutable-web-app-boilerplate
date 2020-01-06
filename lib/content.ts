@@ -75,11 +75,24 @@ const createContent = (
   {
     config,
     language,
+    nonce,
     root,
     version
   }: ExtendedOptions
 ): Content => {
-  const envScript = `window.env = JSON.parse(decodeURIComponent('${encodeURIComponent(config)}'))`
+  const parsedConfig = JSON.parse(config)
+  const env = {
+    ...parsedConfig,
+    ...{
+      nonce,
+      services: {
+        ...parsedConfig.services,
+        ...{ assets: root }
+      }
+    }
+  }
+
+  const envScript = `window.env = JSON.parse(decodeURIComponent('${encodeURIComponent(JSON.stringify(env))}'))`
   const content = render(template, {
     appName,
     envScript,

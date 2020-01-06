@@ -4,9 +4,9 @@
 import cors from 'cors'
 import express from 'express'
 import { readFileSync } from 'fs'
-import { createServer, IncomingMessage } from 'http'
-// import { createServer } from 'https'
-import { join } from 'path'
+import { IncomingMessage } from 'http'
+import { createServer } from 'https'
+import { join, resolve } from 'path'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -22,14 +22,14 @@ const host = 'localhost'
 
 const config = {
   services: {
-    assets: `http://${host}:${assetPort}/${name}`
+    example: 'https://httpbin.org/get'
   },
-  title: 'Dev'
+  title: 'Hello World'
 }
 
 const options = {
   config: JSON.stringify(config),
-  origin: `http://${host}:${assetPort}`,
+  origin: `https://${host}:${assetPort}`,
   version: ''
 }
 
@@ -61,18 +61,19 @@ const hotMiddleware = webpackHotMiddleware(compiler, {
 
 devServer.use(cors())
 devServer.use(`/${name}/index.html.mustache`, express.static(join(__dirname, '/dist', name, 'index.html.mustache')))
+devServer.use(`/${name}/favicon.png`, express.static(join(__dirname, '/dist', name, 'favicon.png')))
 devServer.use(`/${name}/locales`, express.static(join(__dirname, '/dist', name, 'locales')))
 devServer.use(devMiddleware)
 devServer.use(hotMiddleware)
 
 const assetServer = createServer({
-  // cert: readFileSync('certs/private.crt'),
-  // key: readFileSync('certs/private.key')
+  cert: readFileSync('certs/private.crt'),
+  key: readFileSync('certs/private.key')
 }, devServer)
 
 const server = createServer({
-  // cert: readFileSync('certs/private.crt'),
-  // key: readFileSync('certs/private.key')
+  cert: readFileSync('certs/private.crt'),
+  key: readFileSync('certs/private.key')
 }, (req, res) => {
   const handleError = (err: Error) => {
     console.error(err)

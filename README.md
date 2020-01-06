@@ -2,6 +2,7 @@
 This project is based on the principles and architecture of [Immutable Web Apps](https://immutablewebapps.org/).
 
 ## Local Developement
+
 Run development environment for the client application:
 ```bash
 $ yarn start
@@ -14,9 +15,16 @@ The experimental stage is completely isolated from the production stage, and sho
 
 Otherwise, all application versions may be tested directly on the live stage (see below).
 
-Make sure you have [jq](https://stedolan.github.io/jq/) installed:
+## Authentication
+For client authentication the interface needs to be configured with a RedBox endpoint for redirecting sign in/out and a Lambda endpoint for requesting JWT auth tokens. These can be added to via appConfig and devServer (for local development).
+
 ```bash
-$ brew install jq
+  ...
+  services: {
+    ...
+    someApi: 'https://httpbin.org/get',
+  }
+  ...
 ```
 
 ## Initial Setup
@@ -37,7 +45,7 @@ To establish an application stage several values must be created in the SSM Para
 
 **appDomain**  
 ```
-experimental-webapp.headbox.com
+some.domain.com
 ```
 
 **appVersion**
@@ -51,25 +59,38 @@ experimental-webapp.headbox.com
 
 Run `$ yarn setup` and you will be guided through this process
 
+## Translations
+The project uses [json-autotranslate](https://www.npmjs.com/package/json-autotranslate) to run translations for the interface copy. This passes `en` locale files into the Google Translate API to generate foreign langauage locale files. It is currently setup to produce Polish translations as an example.
+
+You will need to set up [serivce account authentiucation](https://cloud.google.com/docs/authentication/getting-started) for this proccess to work.
+
 ## Deployment Process
-> The intention is to move deployments to a Drone CI/CD pipeline.
+We use a continuous delivery model based on [Git Flow](https://danielkummer.github.io/git-flow-cheatsheet/) to deploy both our application bundles and the lambda function that serves them.
 
-### Asset deployment
-Assets are  versioned, tagged and then deployed to S3
+To kick of an asset deployment please perform the following steps:
 
-```bash
-$ yarn deploy:assets
-```
+### Experimental
+1. Create a feature branch from develop, e.g. `feature/my-awesome-new-thing`
+2. Code up your new feature
+3. Run `yarn version` to add a pre-release semver to the current version number, e.g. `0.1.2-myfeature`
+4. Push the feature branch and make a pull request to develop
+5. Ensure that the pull request has 1 approval and a passing build
+6. Merge the pull request into develop
 
-### App deployment
+
+### Production
+1. Create a release branch from develop, e.g. `release/my-awesome-new-thing`
+2. Checkout the release branch and run `yarn version`, incrementing to the next appropriate semver 
+4. Push the release branch and make a pull request to master
+5. Ensure that the pull request has 1 approval and a passing build
+6. Merge the pull request into master
+
+...thats it, your new version will be deployed into S3 and can be tested and then released! 🍻
+
 The App only needs to be deployed when there are either:
 
 1.  Infrastructural changes.
 2.  Updates to `index.html.mustache` which require new data to be passed into the template.
-
-```bash
-$ yarn deploy:app
-```
 
 ### Testing
 Rather than a dedicacted UAT environemnt we can test our immutable applications in production. This has the advantage of giving us the most realistic testing conditions possible, although it is still possible to test on the experimental stage for riskier features.

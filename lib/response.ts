@@ -75,7 +75,7 @@ const createIndexResponse = (body: any, csp: string) => ({
     'content-type': [{
       key: 'Content-Type',
       value: 'text/html; charset=utf-8'
-    }]  },
+    }]},
   status: '200',
   statusDescription: 'OK'
 })
