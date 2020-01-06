@@ -15,18 +15,6 @@ The experimental stage is completely isolated from the production stage, and sho
 
 Otherwise, all application versions may be tested directly on the live stage (see below).
 
-## Authentication
-For client authentication the interface needs to be configured with a RedBox endpoint for redirecting sign in/out and a Lambda endpoint for requesting JWT auth tokens. These can be added to via appConfig and devServer (for local development).
-
-```bash
-  ...
-  services: {
-    ...
-    someApi: 'https://httpbin.org/get',
-  }
-  ...
-```
-
 ## Initial Setup
 Ensure you have the AWS CLI installed and configured:
 
@@ -62,7 +50,7 @@ Run `$ yarn setup` and you will be guided through this process
 ## Translations
 The project uses [json-autotranslate](https://www.npmjs.com/package/json-autotranslate) to run translations for the interface copy. This passes `en` locale files into the Google Translate API to generate foreign langauage locale files. It is currently setup to produce Polish translations as an example.
 
-You will need to set up [serivce account authentiucation](https://cloud.google.com/docs/authentication/getting-started) for this proccess to work.
+You will need to set up [service account authentication](https://cloud.google.com/docs/authentication/getting-started) for this proccess to work.
 
 ## Deployment Process
 We use a continuous delivery model based on [Git Flow](https://danielkummer.github.io/git-flow-cheatsheet/) to deploy both our application bundles and the lambda function that serves them.
