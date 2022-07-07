@@ -62,7 +62,7 @@
     "json-autotranslate": "^1.4.0",
     "less": "^2.7.3",
     "less-loader": "^5.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-fetch": "^2.6.0",
     "numeral": "^2.0.6",
     "phin": "^3.4.0",
